@@ -1,21 +1,29 @@
-readme file for GR5293 Project Iris RecognitionAuthor: Zonghao Li   (zl2613@columbia.edu)
-Written in: 2018/04/04For further updates on this project, please check: https://github.com/zonghao1/Personal-Identification-Based-on-Iris-Texture-Analysis-Project
+readme file for GR5293 Project Iris Recognition
+Author: Zonghao Li   (zl2613@columbia.edu)
+Written in: 2018/04/04
+For further updates on this project, please check: https://github.com/zonghao1/Personal-Identification-Based-on-Iris-Texture-Analysis-Project
+
 This project implemented the Iris Recognition Algorithm Personal Identification Based on Iris Texture Analysis by Li Ma et al.
 Paper avaiable at    http://ieeexplore.ieee.org/document/1251145/
-#Portions of the research in this paper use the CASIA-IrisV1 collected by the Chinese Academy of Sciences' Institute of Automation (CASIA)Ó and a reference to ÒCASIA-IrisV1, http://biometrics.idealtest.org/
-ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑCode Reproduce
+
+#Portions of the research in this paper use the CASIA-IrisV1 collected by the Chinese Academy of Sciences' Institute of Automation (CASIA)â€ and a reference to â€œCASIA-IrisV1, http://biometrics.idealtest.org/
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+Code Reproduce
 
 Please put all python files and the CASIA Iris Image Database (version 1.0)(avaiable at http://biometrics.idealtest.org/) into python working directory and make sure libraries like bumpy, scipy, sklearn, and cv2 was installed previously. 
 
 IrisRecognition is the main file. Run main() would run all the algorithm step by step including IrisLocalization,IrisNormalization, ImageEnhancement, Feature Extraction, IrisMatching, and PerformanceEnvaluation to give the result plots.
 
-Since getting the dataset takes a long time, I wrote another function called runAllReduced() which directly uses the vector data I saved before to do IrisMatching and PerformanceEnvaluation. So change runAll() in main function into runAllReduced() would save running time. Saved data ÒirisTest.npyÓ and ÒirisTrain.npyÓ was included in Òadditional fileÓ folder.
+Since getting the dataset takes a long time, I wrote another function called runAllReduced() which directly uses the vector data I saved before to do IrisMatching and PerformanceEnvaluation. So change runAll() in main function into runAllReduced() would save running time. Saved data â€œirisTest.npyâ€ and â€œirisTrain.npyâ€ was included in â€œadditional fileâ€ folder.
 
-ÒIrisManualCheck.ipynbÓ was also included in the Òadditional fileÓ folder. This could plot each iris image after localization and we could check whether the boundary we found is good or not. 
+â€œIrisManualCheck.ipynbâ€ was also included in the â€œadditional fileâ€ folder. This could plot each iris image after localization and we could check whether the boundary we found is good or not. 
 
-The outputs ( ÒRecognition results using features of different dimensionalityÓ (Figure 10 in paper), ÒRecognition results using different similarity measuresÓ (Table3 in paper), and ÒRecognition results using different dimensionality of PCAÓ was included in the output
+The outputs ( â€œRecognition results using features of different dimensionalityâ€ (Figure 10 in paper), â€œRecognition results using different similarity measuresâ€ (Table3 in paper), and â€œRecognition results using different dimensionality of PCAâ€ was included in the output
 folder).
-ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑGeneral ProceduresI. IrisLocalization.py 
+
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+General Procedures
+I. IrisLocalization.py 
 
 a).First we try to localize the pupil. Since the pupil is darker than other parts in the image, we estimate the center of pupil by finding the row and column that has minimum sum of values. In some images the eyelash was too dark that influenced the outcome, so I fist took a sub image so that the influence of eyelash was greatly minimized. 
 b). After the first rough estimate of the center of pupil, we binarize a 120*120 region centered at that with a threshold of 65 which is the optimal value after several testing. From this binary image, we could have a better estimate of the pupil center and also pupil 
@@ -50,8 +58,16 @@ a).This is the main file for the whole project. Simply run the main function wou
 
 b). Since getting the dataset takes a long time, I wrote another function called runAllReduced() which directly uses the vector data I saved before to do IrisMatching and PerformanceEnvaluation. So change runAll() in main function into runAllReduced() would save running time. 
 
-ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑLimitationCurrently the best accuracy rate this algorithm could achieve is 90.50%. By further tuning the parameters in IrisLocalization.py, we can get a better accuracy rate. Other PCA dimension and LDA dimensions could also be tested to see if we could achieve a better accuracy rate. Also, using bootstrap to generate dataset could give us an estimate and Confidence Interval of the variance of the CRR, FMR, and FNMR. 
+
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+Limitation
+
+Currently the best accuracy rate this algorithm could achieve is 90.50%. By further tuning the parameters in IrisLocalization.py, we can get a better accuracy rate. Other PCA dimension and LDA dimensions could also be tested to see if we could achieve a better accuracy rate. Also, using bootstrap to generate dataset could give us an estimate and Confidence Interval of the variance of the CRR, FMR, and FNMR. 
 
 Another limitation of this project is the sample size. We only have 108 samples with 7 images for each sample. If we want to further test this algorithm, more samples would give us a much better results. 
 
-
+
+
+
+
+
